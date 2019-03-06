@@ -31,6 +31,22 @@ ui <- navbarPage("Shiny app",
                             )
                           ) # fluidPage
                  ), #  titlePanel
+                 tabPanel("Random generator",
+                          sidebarLayout(position = "right",
+                                        sidebarPanel(
+                                          selectInput("dist", label = h3("Select the distribution"), 
+                                                      choices = list(Normal="rnorm", Uniform="runif", Exponential="rexp"),
+                                                      selected = 1),
+                                          sliderInput("n_sample", label = h3("Number of samples"), min = 10, 
+                                                      max = 100, value = 50),
+                                          sliderInput("n_bins", label = h3("Number of bins"), min = 1, 
+                                                      max = 50, value = 30)
+                                        ), # sidebarPanel
+                                        mainPanel(
+                                          plotOutput(outputId = "pulpo")
+                                        ) # mainPanel
+                          ) # sidebarLayout
+                 ), #  tabPanel
                  tabPanel("References",
                           includeMarkdown("references.md")
                  ) #  titlePanel
@@ -56,6 +72,10 @@ server <- function(input, output, session) {
         geom_point()
     }
   })
+  
+  cmd = reactive(eval(parse(text=paste(input$dist,"(",input$n_sample,")",sep=""))));
+  
+  output$pulpo <- renderPlot(hist(cmd(), breaks=input$n_bins));
 }
 
 # Run the application 
