@@ -19,7 +19,15 @@ ui <- fluidPage(
    # Application title
    titlePanel("That is a new Shiny app"),
    
-   includeMarkdown("references.md"),
+   p(tags$button(class="btn btn-warning", 
+                 `data-toggle`="collapse", 
+                 `data-target`="#collapseExample",
+                 "References")),
+   
+   div(class="collapse", id="collapseExample",
+       div(class="card card-body",
+           includeMarkdown("references.md")
+       )),
    
    selectInput("select", label = h3("Plot by type of alimentation"), 
                choices = character(0),
