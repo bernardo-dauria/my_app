@@ -1,3 +1,5 @@
+ - [tasks](http://minivideos.uc3m.es/public/shiny-tasks.html)
+
  - [Shiny on RStudio](https://shiny.rstudio.com/)
  
  - [Shiny written tutorial](https://shiny.rstudio.com/tutorial/written-tutorial/lesson1/)
